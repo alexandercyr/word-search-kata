@@ -56,5 +56,17 @@ public class WordSearchTest {
 		assertEquals("B", wordTable.get(wordTable.size()-1).get(wordTable.size()-1).toString());
 	}
 	
+	@Test
+	public void findWordsOnTheXAxis() {
+		wordSearch.populateSearch(txtWordSearch);
+		assertEquals("SCOTTY: (0,5),(1,5),(2,5),(3,5),(4,5),(5,5)", wordSearch.findHoriz("SCOTTY"));
+	}
+	
+	/*@Test
+	public void iterateThroughTableToCheckMatchesForEachWordFirstCharacter() {
+		wordSearch.populateSearch(txtWordSearch);
+		wordSearch.findAllMatches();
+	}*/
+	
 	
 }
