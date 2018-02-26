@@ -62,6 +62,12 @@ public class WordSearchTest {
 		assertEquals("SCOTTY: (0,5),(1,5),(2,5),(3,5),(4,5),(5,5)", wordSearch.findHoriz("SCOTTY"));
 	}
 	
+	@Test
+	public void findWordsOnTheYAxis() {
+		wordSearch.populateSearch(txtWordSearch);
+		assertEquals("BONES: (0,6),(0,7),(0,8),(0,9),(0,10)", wordSearch.findVert("BONES"));
+	}
+	
 	/*@Test
 	public void iterateThroughTableToCheckMatchesForEachWordFirstCharacter() {
 		wordSearch.populateSearch(txtWordSearch);

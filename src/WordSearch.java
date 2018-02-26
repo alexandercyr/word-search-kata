@@ -10,11 +10,11 @@ import java.util.Arrays;
 public class WordSearch {
 	ArrayList <String> wordList = new ArrayList<String>();
 	ArrayList<ArrayList<String>> wordTable = new ArrayList<ArrayList<String>>();
-	
+
 	public WordSearch() {
-		
+
 	}
-	
+
 	public void populateSearch(String txt) {
 		String[] lines = txt.split("\n");
 		setWordList( new ArrayList<String>(Arrays.asList(lines[0].split(","))));
@@ -24,7 +24,7 @@ public class WordSearch {
 			}
 		}
 	}
-	
+
 	public void findAllMatches() {
 		String firstCharacters = "";
 		for(int i = 0; i < wordList.size(); i++) {
@@ -38,11 +38,11 @@ public class WordSearch {
 				int letterInWordListIndex = firstCharacters.indexOf(letterAtIndex);
 				if (letterInWordListIndex >= 0) {
 					while(letterInWordListIndex >= 0) {
-					     System.out.println(letterAtIndex + ": ("+ j+", "+i+")");
-					     //findHoriz()
-					     //findVert()
-					     //findDiag()
-					     letterInWordListIndex = firstCharacters.indexOf(letterAtIndex, letterInWordListIndex+1);     
+						System.out.println(letterAtIndex + ": ("+ j+", "+i+")");
+						//findHoriz()
+						//findVert()
+						//findDiag()
+						letterInWordListIndex = firstCharacters.indexOf(letterAtIndex, letterInWordListIndex+1);     
 					}
 				}
 			}
@@ -55,22 +55,54 @@ public class WordSearch {
 			for(int j = 0; j < rowOfLetters.size() - word.length(); j++) {
 				if(letter.equalsIgnoreCase(rowOfLetters.get(j))) {
 					String found = word + ": ";
-					for(int x = 0; x < word.length(); x++) {
-						String letterAtIndex = "" + word.charAt(x);
-						if (letterAtIndex.equalsIgnoreCase(rowOfLetters.get(j + x))){
-							found = found + "(" + (j + x) + "," +  i + ")";
-							if (x == (word.length()-1)) {
-								return found;
+					if(word.length() <= rowOfLetters.size() - j)
+						for(int x = 0; x < word.length(); x++) {
+							String letterAtIndex = "" + word.charAt(x);
+							if (letterAtIndex.equalsIgnoreCase(rowOfLetters.get(j + x))){
+								found = found + "(" + (j + x) + "," +  i + ")";
+								if (x == (word.length()-1)) {
+									return found;
+								}
+								else {
+									found = found + ",";
+								}
 							}
-							else {
-								found = found + ",";
+						}
+				}
+			}
+		}
+		return "Not found horizontally.";
+	}
+
+	public String findVert(String word) {
+		String letter = "" + word.charAt(0);
+		for(int i = 0; i < wordTable.size(); i++) {
+			for(int j = 0; j < wordTable.get(i).size() - word.length(); j++) {
+				ArrayList<String> rowOfLetters = wordTable.get(j);
+
+				if(letter.equalsIgnoreCase(rowOfLetters.get(i))) {
+					String found = word + ": ";
+					if(word.length() <= rowOfLetters.size() - i) {
+
+						for(int y = 0; y < word.length(); y++) {
+
+							String letterAtIndex = "" + word.charAt(y);
+							if (letterAtIndex.equalsIgnoreCase(wordTable.get(j+y).get(i))){
+								found = found + "(" + i + "," +  (j+y) + ")";
+								if (y == (word.length()-1)) {
+									return found;
+								}
+								else {
+									found = found + ",";
+								}
 							}
+
 						}
 					}
 				}
 			}
 		}
-		return "Not found horizontally.";
+		return "Not found vertically.";
 	}
 
 	public ArrayList<String> getWordList() {
