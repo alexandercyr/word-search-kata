@@ -37,10 +37,17 @@ public class WordSearchTest {
 	}
 	
 	@Test
-	public void getFirstLineOfWordsInitialTestWithFullList() {
+	public void getFirstLineOfWordsTestWithFullList() {
 		wordSearch.populateSearch(txtWordSearch);
 		assertEquals("[BONES, KHAN, KIRK, SCOTTY, SPOCK, SULU, UHURA]", wordSearch.getWordList().toString());
 		
+	}
+	
+	@Test
+	public void getFirstRowOfWordSearchTable() {
+		wordSearch.populateSearch(txtWordSearch);
+		assertEquals("[U, M, K, H, U, L, K, I, N, V, J, O, C, W, E]", wordSearch.getWordTable().get(0).toString());
+
 	}
 	
 	
