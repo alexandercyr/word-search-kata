@@ -104,6 +104,34 @@ public class WordSearch {
 		}
 		return "Not found vertically.";
 	}
+	
+	public String findDiagDescending(String word) {
+		String letter = "" + word.charAt(0);
+		for(int i = 0; i < wordTable.size(); i++) {
+			ArrayList<String> rowOfLetters = wordTable.get(i);
+			for(int j = 0; j < rowOfLetters.size() - word.length(); j++) {
+				if(letter.equalsIgnoreCase(rowOfLetters.get(j))) {
+					String found = word + ": ";
+					if(word.length() <= rowOfLetters.size() - j && word.length() <= rowOfLetters.size() - i)
+						for(int x = 0; x < word.length(); x++) {
+							String letterAtIndex = "" + word.charAt(x);
+							if (letterAtIndex.equalsIgnoreCase(wordTable.get(i+x).get(j+x))){
+								found = found + "(" + (j + x) + "," +  (i+x) + ")";
+								if (x == (word.length()-1)) {
+									return found;
+								}
+								else {
+									found = found + ",";
+								}
+							}
+							System.out.println(found);
+						}
+				}
+			}
+		}
+		
+		return "Not found diagonally descending.";
+	}
 
 	public ArrayList<String> getWordList() {
 		return wordList;

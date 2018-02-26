@@ -68,6 +68,12 @@ public class WordSearchTest {
 		assertEquals("BONES: (0,6),(0,7),(0,8),(0,9),(0,10)", wordSearch.findVert("BONES"));
 	}
 	
+	@Test
+	public void findWordsDiagDescending() {
+		wordSearch.populateSearch(txtWordSearch);
+		assertEquals("SPOCK: (2,1),(3,2),(4,3),(5,4),(6,5)", wordSearch.findDiagDescending("SPOCK"));
+	}
+	
 	/*@Test
 	public void iterateThroughTableToCheckMatchesForEachWordFirstCharacter() {
 		wordSearch.populateSearch(txtWordSearch);
