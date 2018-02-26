@@ -1,5 +1,7 @@
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,21 +35,25 @@ public class WordSearchTest {
 	public void getFirstLineOfWordsInitialTest() {
 		wordSearch.populateSearch("one,two,three");
 		assertEquals("[one, two, three]", wordSearch.getWordList().toString());
-		
 	}
 	
 	@Test
 	public void getFirstLineOfWordsTestWithFullList() {
 		wordSearch.populateSearch(txtWordSearch);
 		assertEquals("[BONES, KHAN, KIRK, SCOTTY, SPOCK, SULU, UHURA]", wordSearch.getWordList().toString());
-		
 	}
 	
 	@Test
 	public void getFirstRowOfWordSearchTable() {
 		wordSearch.populateSearch(txtWordSearch);
 		assertEquals("[U, M, K, H, U, L, K, I, N, V, J, O, C, W, E]", wordSearch.getWordTable().get(0).toString());
-
+	}
+	
+	@Test
+	public void getLastElementOfWordSearchTable() {
+		wordSearch.populateSearch(txtWordSearch);
+		ArrayList<ArrayList<String>> wordTable = wordSearch.getWordTable();
+		assertEquals("B", wordTable.get(wordTable.size()-1).get(wordTable.size()-1).toString());
 	}
 	
 	
