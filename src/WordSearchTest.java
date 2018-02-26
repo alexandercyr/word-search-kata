@@ -15,9 +15,9 @@ public class WordSearchTest {
 	
 	WordSearch wordSearch = new WordSearch();
 	String txtWordSearch = "BONES,KHAN,KIRK,SCOTTY,SPOCK,SULU,UHURA\n" + 
-			"U,M,K,H,U,L,K,I,N,V,J,O,C,W,E\n" + 
-			"L,L,S,H,K,Z,Z,W,Z,C,G,J,U,Y,G\n" + 
-			"H,S,U,P,J,P,R,J,D,H,S,B,X,T,G\n" + 
+			"U,M,K,H,U,L,K,I,N,V,J,O,C,W,T\n" + 
+			"L,L,S,H,K,Z,Z,W,Z,C,G,J,U,A,G\n" + 
+			"H,S,U,P,J,P,R,J,D,H,S,B,C,T,G\n" + 
 			"B,R,J,S,O,E,Q,E,T,I,K,K,G,L,E\n" + 
 			"A,Y,O,A,G,C,I,R,D,Q,H,R,T,C,D\n" + 
 			"S,C,O,T,T,Y,K,Z,R,E,P,P,X,P,F\n" + 
@@ -46,7 +46,7 @@ public class WordSearchTest {
 	@Test
 	public void getFirstRowOfWordSearchTable() {
 		wordSearch.populateSearch(txtWordSearch);
-		assertEquals("[U, M, K, H, U, L, K, I, N, V, J, O, C, W, E]", wordSearch.getWordTable().get(0).toString());
+		assertEquals("[U, M, K, H, U, L, K, I, N, V, J, O, C, W, T]", wordSearch.getWordTable().get(0).toString());
 	}
 	
 	@Test
@@ -72,6 +72,13 @@ public class WordSearchTest {
 	public void findWordsDiagDescending() {
 		wordSearch.populateSearch(txtWordSearch);
 		assertEquals("SPOCK: (2,1),(3,2),(4,3),(5,4),(6,5)", wordSearch.findDiagDescending("SPOCK"));
+	}
+	
+	@Test 
+	public void findWordsDiagAscending() {
+		wordSearch.populateSearch(txtWordSearch);
+		assertEquals("CAT: (12,2),(13,1),(14,0)", wordSearch.findDiagAscending("CAT"));
+
 	}
 	
 	/*@Test

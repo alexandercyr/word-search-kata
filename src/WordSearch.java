@@ -52,7 +52,7 @@ public class WordSearch {
 		String letter = "" + word.charAt(0);
 		for(int i = 0; i < wordTable.size(); i++) {
 			ArrayList<String> rowOfLetters = wordTable.get(i);
-			for(int j = 0; j < rowOfLetters.size() - word.length(); j++) {
+			for(int j = 0; j < rowOfLetters.size() - word.length() + 1; j++) {
 				if(letter.equalsIgnoreCase(rowOfLetters.get(j))) {
 					String found = word + ": ";
 					if(word.length() <= rowOfLetters.size() - j)
@@ -77,7 +77,7 @@ public class WordSearch {
 	public String findVert(String word) {
 		String letter = "" + word.charAt(0);
 		for(int i = 0; i < wordTable.size(); i++) {
-			for(int j = 0; j < wordTable.get(i).size() - word.length(); j++) {
+			for(int j = 0; j < wordTable.get(i).size() - word.length() + 1; j++) {
 				ArrayList<String> rowOfLetters = wordTable.get(j);
 
 				if(letter.equalsIgnoreCase(rowOfLetters.get(i))) {
@@ -109,7 +109,7 @@ public class WordSearch {
 		String letter = "" + word.charAt(0);
 		for(int i = 0; i < wordTable.size(); i++) {
 			ArrayList<String> rowOfLetters = wordTable.get(i);
-			for(int j = 0; j < rowOfLetters.size() - word.length(); j++) {
+			for(int j = 0; j < rowOfLetters.size() - word.length() + 1; j++) {
 				if(letter.equalsIgnoreCase(rowOfLetters.get(j))) {
 					String found = word + ": ";
 					if(word.length() <= rowOfLetters.size() - j && word.length() <= rowOfLetters.size() - i)
@@ -124,13 +124,41 @@ public class WordSearch {
 									found = found + ",";
 								}
 							}
-							System.out.println(found);
 						}
 				}
 			}
 		}
 		
 		return "Not found diagonally descending.";
+	}
+	public String findDiagAscending(String word) {
+		String letter = "" + word.charAt(0);
+		for(int i = 0; i < wordTable.size(); i++) {
+			ArrayList<String> rowOfLetters = wordTable.get(i);
+			for(int j = 0; j < rowOfLetters.size() - word.length() + 1; j++) {
+				if(letter.equalsIgnoreCase(rowOfLetters.get(j))) {
+					String found = word + ": ";
+					if(word.length() <= rowOfLetters.size() - j && word.length() <=  (i+1))
+						for(int x = 0; x < word.length(); x++) {
+							String letterAtIndex = "" + word.charAt(x);
+							if (letterAtIndex.equalsIgnoreCase(wordTable.get(i-x).get(j+x))){
+								found = found + "(" + (j + x) + "," +  (i-x) + ")";
+								if (x == (word.length()-1)) {
+									return found;
+								}
+								else {
+									found = found + ",";
+								}
+							}
+							System.out.println(found);
+
+						}
+
+				}
+			}
+		}
+		
+		return "Not found diagonally ascending.";
 	}
 
 	public ArrayList<String> getWordList() {
