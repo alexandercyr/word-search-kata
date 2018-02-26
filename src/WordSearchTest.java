@@ -32,9 +32,16 @@ public class WordSearchTest {
 	@Test
 	public void getFirstLineOfWordsInitialTest() {
 		wordSearch.populateSearch("one,two,three");
-		System.out.println(wordSearch.getWordList().toString());
 		assertEquals("[one, two, three]", wordSearch.getWordList().toString());
-
 		
 	}
+	
+	@Test
+	public void getFirstLineOfWordsInitialTestWithFullList() {
+		wordSearch.populateSearch(txtWordSearch);
+		assertEquals("[BONES, KHAN, KIRK, SCOTTY, SPOCK, SULU, UHURA]", wordSearch.getWordList().toString());
+		
+	}
+	
+	
 }
