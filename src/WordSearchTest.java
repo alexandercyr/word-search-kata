@@ -93,6 +93,12 @@ public class WordSearchTest {
 		assertEquals("KHAN: (5,9),(5,8),(5,7),(5,6)", wordSearch.findVertBackward("KHAN"));
 	}
 	
+	@Test
+	public void findWordsBackwardDiagDescending() {
+		wordSearch.populateSearch(txtWordSearch);
+		assertEquals("SULU: (3,3),(2,2),(1,1),(0,0)", wordSearch.findDiagDescendingBackward("SULU"));
+
+	}
 	
 	/*@Test
 	public void iterateThroughTableToCheckMatchesForEachWordFirstCharacter() {

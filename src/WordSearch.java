@@ -55,7 +55,7 @@ public class WordSearch {
 			for(int j = 0; j < rowOfLetters.size(); j++) {
 				if(letter.equalsIgnoreCase(rowOfLetters.get(j))) {
 					String found = word + ": ";
-					if(word.length() <= rowOfLetters.size() - j)
+					if(word.length() <= rowOfLetters.size() - j) {
 						for(int x = 0; x < word.length(); x++) {
 							String letterAtIndex = "" + word.charAt(x);
 							if (letterAtIndex.equalsIgnoreCase(rowOfLetters.get(j + x))){
@@ -68,6 +68,7 @@ public class WordSearch {
 								}
 							}
 						}
+					}
 				}
 			}
 		}
@@ -112,7 +113,7 @@ public class WordSearch {
 			for(int j = 0; j < rowOfLetters.size(); j++) {
 				if(letter.equalsIgnoreCase(rowOfLetters.get(j))) {
 					String found = word + ": ";
-					if(word.length() <= rowOfLetters.size() - j && word.length() <= rowOfLetters.size() - i)
+					if(word.length() <= rowOfLetters.size() - j && word.length() <= rowOfLetters.size() - i) {
 						for(int x = 0; x < word.length(); x++) {
 							String letterAtIndex = "" + word.charAt(x);
 							if (letterAtIndex.equalsIgnoreCase(wordTable.get(i+x).get(j+x))){
@@ -125,6 +126,7 @@ public class WordSearch {
 								}
 							}
 						}
+					}
 				}
 			}
 		}
@@ -165,7 +167,7 @@ public class WordSearch {
 			for(int j = 0; j < rowOfLetters.size(); j++) {
 				if(letter.equalsIgnoreCase(rowOfLetters.get(j))) {
 					String found = word + ": ";
-					if(word.length() <= j)
+					if(word.length() <= j+1) {
 						for(int x = 0; x < word.length(); x++) {
 							String letterAtIndex = "" + word.charAt(x);
 							if (letterAtIndex.equalsIgnoreCase(rowOfLetters.get(j - x))){
@@ -178,6 +180,7 @@ public class WordSearch {
 								}
 							}
 						}
+					}
 				}
 			}
 		}
@@ -191,7 +194,7 @@ public class WordSearch {
 
 				if(letter.equalsIgnoreCase(rowOfLetters.get(j))) {
 					String found = word + ": ";
-					if(word.length() <= i) {
+					if(word.length() <= i+1) {
 
 						for(int y = 0; y < word.length(); y++) {
 
@@ -213,7 +216,33 @@ public class WordSearch {
 		}
 		return "Not found vertically backwards.";
 	}
-	
+	public String findDiagDescendingBackward(String word) {
+		String letter = "" + word.charAt(0);
+		for(int i = 0; i < wordTable.size(); i++) {
+			ArrayList<String> rowOfLetters = wordTable.get(i);
+			for(int j = 0; j < rowOfLetters.size(); j++) {
+				if(letter.equalsIgnoreCase(rowOfLetters.get(j))) {
+					String found = word + ": ";
+					if(word.length() <= j+1 && word.length() <= i+1) {
+						for(int x = 0; x < word.length(); x++) {
+							String letterAtIndex = "" + word.charAt(x);
+							if (letterAtIndex.equalsIgnoreCase(wordTable.get(i-x).get(j-x))){
+								found = found + "(" + (j - x) + "," +  (i-x) + ")";
+								if (x == (word.length()-1)) {
+									return found;
+								}
+								else {
+									found = found + ",";
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		return "Not found diagonally descending.";
+	}
 	/*
 	public ArrayList<String> findCharactersInTable(String word){
 		ArrayList<String> letterCoords = new ArrayList<String>();
