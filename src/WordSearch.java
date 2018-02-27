@@ -25,12 +25,12 @@ public class WordSearch {
 		}
 	}
 
-	public void findAllMatches() {
+	public String findAllMatches() {
 		String firstCharacters = "";
+		String foundWords = "";
 		for(int i = 0; i < wordList.size(); i++) {
 			firstCharacters = firstCharacters + wordList.get(i).charAt(0);
 		}
-		System.out.println(firstCharacters);
 		for(int i = 0; i < wordTable.size(); i++) {
 			ArrayList<String> rowOfLetters = wordTable.get(i);
 			for(int j = 0; j < rowOfLetters.size(); j++) {
@@ -38,16 +38,185 @@ public class WordSearch {
 				int letterInWordListIndex = firstCharacters.indexOf(letterAtIndex);
 				if (letterInWordListIndex >= 0) {
 					while(letterInWordListIndex >= 0) {
-						System.out.println(letterAtIndex + ": ("+ j+", "+i+")");
-						//findHoriz()
-						//findVert()
-						//findDiag()
+						String word = wordList.get(letterInWordListIndex);
+						foundWords = foundWords + findHoriz(word, j, i);
+						foundWords = foundWords + findVert(word, j, i);
+						foundWords = foundWords + findDiag(word, j, i);
 						letterInWordListIndex = firstCharacters.indexOf(letterAtIndex, letterInWordListIndex+1);     
 					}
 				}
 			}
 		}
+		System.out.println(foundWords);
+		return foundWords;
 	}
+	public String findHoriz(String word, int x, int y) {
+		
+		if(word.length() <= wordTable.size() - x) {
+			String found = word + ": ";
+			for(int i = 0; i < word.length(); i++) {
+				String letterAtIndex = "" + word.charAt(i);
+				if (letterAtIndex.equalsIgnoreCase(wordTable.get(y).get(x + i))){
+
+					found = found + "(" + (x + i) + "," +  y + ")";
+					if (i == (word.length()-1)) {
+						return found + "\n";
+					}
+					else {
+						found = found + ",";
+					}
+				}
+				else {
+					break;
+				}
+			}
+		}
+		if(word.length() <= x+1){
+			String found = word + ": ";
+			for(int i = 0; i < word.length(); i++) {
+				String letterAtIndex = "" + word.charAt(i);
+				if (letterAtIndex.equalsIgnoreCase(wordTable.get(y).get(x - i))){
+					found = found + "(" + (x - i) + "," +  y + ")";
+					if (i == (word.length()-1)) {
+						return found +"\n";
+					}
+					else {
+						found = found + ",";
+					}
+				}
+				else {
+					break;
+				}
+			}
+		}
+		return "";
+	}
+	public String findVert(String word, int x, int y) {
+		if(word.length() <= wordTable.size() - y) {
+			String found = word + ": ";
+ 
+			for(int i = 0; i < word.length(); i++) {
+
+				String letterAtIndex = "" + word.charAt(i);
+				if (letterAtIndex.equalsIgnoreCase(wordTable.get(i+y).get(x))){
+					found = found + "(" + x + "," +  (i+y) + ")";
+					if (i == (word.length()-1)) {
+						return found + "\n";
+					}
+					else {
+						found = found + ",";
+					}
+				}
+				else {
+					break;
+				}
+
+			}
+		}
+		if(word.length() <= y + 1) {
+			String found = word + ": ";
+ 
+			for(int i = 0; i < word.length(); i++) {
+
+				String letterAtIndex = "" + word.charAt(i);
+				if (letterAtIndex.equalsIgnoreCase(wordTable.get(y-i).get(x))){
+					found = found + "(" + x + "," +  (y-i) + ")";
+					if (i == (word.length()-1)) {
+						return found + "\n";
+					}
+					else {
+						found = found + ",";
+					}
+				}
+				else {
+					break;
+				}
+
+			}
+		}
+		return "";
+	}
+	public String findDiag(String word, int x, int y) {
+		if(word.length() <= wordTable.size() - x && word.length() <= wordTable.size() - y) {
+			String found = word + ": ";
+
+			for(int i = 0; i < word.length(); i++) {
+				String letterAtIndex = "" + word.charAt(i);
+				if (letterAtIndex.equalsIgnoreCase(wordTable.get(y+i).get(x+i))){
+					found = found + "(" + (x + i) + "," +  (y+i) + ")";
+					if (i == (word.length()-1)) {
+						return found + "\n";
+					}
+					else {
+						found = found + ",";
+					}
+				}
+				else {
+					break;
+				}
+			}
+		}
+		if(word.length() <= wordTable.size() - x && word.length() <=  y+1) {
+			String found = word + ": ";
+
+			for(int i = 0; i < word.length(); i++) {
+				String letterAtIndex = "" + word.charAt(i);
+				if (letterAtIndex.equalsIgnoreCase(wordTable.get(y-i).get(x+i))){
+					found = found + "(" + (x + i) + "," +  (y-i) + ")";
+					if (i == (word.length()-1)) {
+						return found + "\n";
+					}
+					else {
+						found = found + ",";
+					}
+				}
+				else {
+					break;
+				}
+			}
+		}
+		
+		if(word.length() <= 1 + x && word.length() <= 1 + y) {
+			String found = word + ": ";
+
+			for(int i = 0; i < word.length(); i++) {
+				String letterAtIndex = "" + word.charAt(i);
+				if (letterAtIndex.equalsIgnoreCase(wordTable.get(y-i).get(x-i))){
+					found = found + "(" + (x - i) + "," +  (y-i) + ")";
+					if (i == (word.length()-1)) {
+						return found + "\n";
+					}
+					else {
+						found = found + ",";
+					}
+				}
+				else {
+					break;
+				}
+			}
+		}
+		if(word.length() <= 1 + x && word.length() <= wordTable.size() - y) {
+			String found = word + ": ";
+
+			for(int i = 0; i < word.length(); i++) {
+				String letterAtIndex = "" + word.charAt(i);
+				if (letterAtIndex.equalsIgnoreCase(wordTable.get(y+i).get(x-i))){
+					found = found + "(" + (x - i) + "," +  (y+i) + ")";
+					if (i == (word.length()-1)) {
+						return found + "\n";
+					}
+					else {
+						found = found + ",";
+					}
+				}
+				else {
+					break;
+				}
+			}
+		}
+		return "";
+	}
+	
 	public String findHoriz(String word) {
 		String letter = "" + word.charAt(0);
 		for(int i = 0; i < wordTable.size(); i++) {
@@ -66,6 +235,9 @@ public class WordSearch {
 								else {
 									found = found + ",";
 								}
+							}
+							else {
+								break;
 							}
 						}
 					}
@@ -97,6 +269,9 @@ public class WordSearch {
 									found = found + ",";
 								}
 							}
+							else {
+								break;
+							}
 
 						}
 					}
@@ -125,6 +300,9 @@ public class WordSearch {
 									found = found + ",";
 								}
 							}
+							else {
+								break;
+							}
 						}
 					}
 				}
@@ -152,6 +330,9 @@ public class WordSearch {
 									found = found + ",";
 								}
 							}
+							else {
+								break;
+							}
 						}
 					}
 				}
@@ -178,6 +359,9 @@ public class WordSearch {
 								else {
 									found = found + ",";
 								}
+							}
+							else {
+								break;
 							}
 						}
 					}
@@ -208,6 +392,9 @@ public class WordSearch {
 									found = found + ",";
 								}
 							}
+							else {
+								break;
+							}
 
 						}
 					}
@@ -235,6 +422,9 @@ public class WordSearch {
 									found = found + ",";
 								}
 							}
+							else {
+								break;
+							}
 						}
 					}
 				}
@@ -261,6 +451,9 @@ public class WordSearch {
 								else {
 									found = found + ",";
 								}
+							}
+							else {
+								break;
 							}
 						}
 					}
