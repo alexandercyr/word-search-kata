@@ -241,7 +241,34 @@ public class WordSearch {
 			}
 		}
 		
-		return "Not found diagonally descending.";
+		return "Not found diagonally descending backwards.";
+	}
+	public String findDiagAscendingBackward(String word) {
+		String letter = "" + word.charAt(0);
+		for(int i = 0; i < wordTable.size(); i++) {
+			ArrayList<String> rowOfLetters = wordTable.get(i);
+			for(int j = 0; j < rowOfLetters.size(); j++) {
+				if(letter.equalsIgnoreCase(rowOfLetters.get(j))) {
+					String found = word + ": ";
+					if(word.length() <= j+1 && word.length() <=  rowOfLetters.size() - i) {
+						for(int x = 0; x < word.length(); x++) {
+							String letterAtIndex = "" + word.charAt(x);
+							if (letterAtIndex.equalsIgnoreCase(wordTable.get(i+x).get(j-x))){
+								found = found + "(" + (j - x) + "," +  (i+x) + ")";
+								if (x == (word.length()-1)) {
+									return found;
+								}
+								else {
+									found = found + ",";
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		return "Not found diagonally ascending backward.";
 	}
 	/*
 	public ArrayList<String> findCharactersInTable(String word){

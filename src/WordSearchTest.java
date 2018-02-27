@@ -100,6 +100,12 @@ public class WordSearchTest {
 
 	}
 	
+	@Test
+	public void findWordsBackwardDiagAscending() {
+		wordSearch.populateSearch(txtWordSearch);
+		assertEquals("UHURA: (4,0),(3,1),(2,2),(1,3),(0,4)", wordSearch.findDiagAscendingBackward("UHURA"));
+	}
+	
 	/*@Test
 	public void iterateThroughTableToCheckMatchesForEachWordFirstCharacter() {
 		wordSearch.populateSearch(txtWordSearch);
