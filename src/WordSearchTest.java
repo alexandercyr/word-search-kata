@@ -14,7 +14,7 @@ import org.junit.Test;
 public class WordSearchTest {
 	
 	WordSearch wordSearch = new WordSearch();
-	String txtWordSearch = "BONES,KHAN,KIRK,SCOTTY,SPOCK,SULU,UHURA\n" + 
+	String txtWordSearch = "BONES,KHAN,KIRK,SCOTTY,SPOCK,SULU,UHURA,CAT\n" + 
 			"U,M,K,H,U,L,K,I,N,V,J,O,C,W,T\n" + 
 			"L,L,S,H,K,Z,Z,W,Z,C,G,J,U,A,G\n" + 
 			"H,S,U,P,J,P,R,J,D,H,S,B,C,T,G\n" + 
@@ -40,7 +40,7 @@ public class WordSearchTest {
 	@Test
 	public void getFirstLineOfWordsTestWithFullList() {
 		wordSearch.populateSearch(txtWordSearch);
-		assertEquals("[BONES, KHAN, KIRK, SCOTTY, SPOCK, SULU, UHURA]", wordSearch.getWordList().toString());
+		assertEquals("[BONES, KHAN, KIRK, SCOTTY, SPOCK, SULU, UHURA, CAT]", wordSearch.getWordList().toString());
 	}
 	
 	@Test
@@ -80,6 +80,19 @@ public class WordSearchTest {
 		assertEquals("CAT: (12,2),(13,1),(14,0)", wordSearch.findDiagAscending("CAT"));
 
 	}
+	
+	@Test
+	public void findWordsBackwardsOnTheXAxis() {
+		wordSearch.populateSearch(txtWordSearch);
+		assertEquals("KIRK: (4,7),(3,7),(2,7),(1,7)", wordSearch.findHorizBackward("KIRK"));
+	}
+	
+	@Test
+	public void findWordsBackwardsOnTheYAxis() {
+		wordSearch.populateSearch(txtWordSearch);
+		assertEquals("KHAN: (5,9),(5,8),(5,7),(5,6)", wordSearch.findVertBackward("KHAN"));
+	}
+	
 	
 	/*@Test
 	public void iterateThroughTableToCheckMatchesForEachWordFirstCharacter() {
