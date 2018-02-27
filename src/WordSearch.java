@@ -39,9 +39,21 @@ public class WordSearch {
 				if (letterInWordListIndex >= 0) {
 					while(letterInWordListIndex >= 0) {
 						String word = wordList.get(letterInWordListIndex);
-						foundWords = foundWords + findHoriz(word, j, i);
-						foundWords = foundWords + findVert(word, j, i);
-						foundWords = foundWords + findDiag(word, j, i);
+						String wordString = findHoriz(word, j, i);
+						if (!wordString.equalsIgnoreCase("")) {
+							foundWords = foundWords + wordString;
+							break;
+						}
+						wordString = findVert(word, j, i);
+						if (!wordString.equalsIgnoreCase("")) {
+							foundWords = foundWords + wordString;
+							break;
+						}
+						wordString = findDiag(word, j, i);
+						if (!wordString.equalsIgnoreCase("")) {
+							foundWords = foundWords + wordString;
+							break;
+						}
 						letterInWordListIndex = firstCharacters.indexOf(letterAtIndex, letterInWordListIndex+1);     
 					}
 				}
@@ -463,20 +475,7 @@ public class WordSearch {
 		
 		return "Not found diagonally ascending backward.";
 	}
-	/*
-	public ArrayList<String> findCharactersInTable(String word){
-		ArrayList<String> letterCoords = new ArrayList<String>();
-		String letter = "" + word.charAt(0);
-		for(int i = 0; i < wordTable.size(); i++) {
-			ArrayList<String> rowOfLetters = wordTable.get(i);
-			for(int j = 0; j < rowOfLetters.size(); j++) {
-				if(letter.equalsIgnoreCase(rowOfLetters.get(j))) {
-					letterCoords.add(j + "," + i);
-				}
-			}
-		}
-		return letterCoords;
-	}*/
+
 
 	public ArrayList<String> getWordList() {
 		return wordList;
