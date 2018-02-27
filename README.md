@@ -2,9 +2,9 @@
 
 A Java program built to find words in a word search puzzle.
 
-Built in Eclipse but should work in any Java IDE.
+This program was built in Eclipse but should work in any Java supported IDE.
 
-Running the jUnit test file will clear all pre-determined tests. Switching out the word search text will work if the text is formatted the same way. 
+Running the jUnit test file will pass all pre-determined tests. Switching out the word search text will work if the text is formatted the same way. 
 
 Users have the ability to search for a particular word accross any of the axises, diagonally, and backwards. They can also find all matches to the word list in one call.
 
