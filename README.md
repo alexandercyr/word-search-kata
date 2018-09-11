@@ -51,3 +51,20 @@ BONES: (0,6),(0,7),(0,8),(0,9),(0,10)
 KIRK: (4,7),(3,7),(2,7),(1,7)
 KHAN: (5,9),(5,8),(5,7),(5,6)
 ```
+```
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+<script type="text/babel">
+class Greeting extends React.Component {
+    render() {
+        return (<p>Hello world</p>);
+    }
+}
+ReactDOM.render(
+    <Greeting />,
+    document.getElementById('root')
+);
+</script>
+```
