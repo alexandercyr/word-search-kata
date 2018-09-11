@@ -59,6 +59,17 @@ KHAN: (5,9),(5,8),(5,7),(5,6)
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
 <script type="text/babel">
 class Greeting extends React.Component {
+    componentDidMount() {
+        if (window.Brightback) {
+        window.Brightback.handleData({
+        app_id: 'APP_ID',
+        email: 'jdoe@example.com',
+        account: {
+          internal_id: '1234AZ55'
+        }
+      });
+      }
+    }
     render() {
         return (<p>Hello world</p>);
     }
