@@ -71,7 +71,7 @@ class Greeting extends React.Component {
       }
     }
     render() {
-        return (<p>Hello world</p>);
+        return (<a id="bb-cancel" href="/fallback">Cancel</a>);
     }
 }
 ReactDOM.render(
